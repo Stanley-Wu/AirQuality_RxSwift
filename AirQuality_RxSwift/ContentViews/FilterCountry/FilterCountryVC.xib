@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FilterCountryVC" customModule="AirQuality_RxSwift" customModuleProvider="target">
+            <connections>
+                <outlet property="tableView" destination="I48-Q6-e76" id="pe7-xz-s9s"/>
+                <outlet property="view" destination="uY6-Ru-yb0" id="c9b-qv-LPo"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="uY6-Ru-yb0">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="I48-Q6-e76">
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="0.63921568630000003" green="0.74901960779999999" blue="0.92156862750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="I48-Q6-e76" firstAttribute="top" secondItem="3Bl-7t-z1o" secondAttribute="top" id="5LO-Th-tKv"/>
+                <constraint firstItem="3Bl-7t-z1o" firstAttribute="trailing" secondItem="I48-Q6-e76" secondAttribute="trailing" id="7RA-YB-I6U"/>
+                <constraint firstItem="I48-Q6-e76" firstAttribute="leading" secondItem="3Bl-7t-z1o" secondAttribute="leading" id="CXa-OS-y72"/>
+                <constraint firstItem="3Bl-7t-z1o" firstAttribute="bottom" secondItem="I48-Q6-e76" secondAttribute="bottom" id="G43-Rm-HIe"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="3Bl-7t-z1o"/>
+            <point key="canvasLocation" x="137.68115942028987" y="124.55357142857142"/>
+        </view>
+    </objects>
+</document>
