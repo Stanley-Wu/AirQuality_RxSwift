@@ -13,6 +13,6 @@
 <img src="https://drive.google.com/uc?export=view&id=1CyLMfpq5rwpZ7mdDGZp6-MsW0nNu7C05" width="800">
   
 #### UI 畫面  
-<img src="https://drive.google.com/uc?export=view&id=1EQ2z0JkKNeuIrsr82My1x9lveBAOit8w" height="600"> <img src="https://drive.google.com/uc?export=view&id=19r5TlHePLMdGUoZfEunnDCGBNaYHMtwh" height="600">  
-<img src="https://drive.google.com/uc?export=view&id=1Pzby3ihZej9Zxfgx5_MKwoOztGcGO9XP" height="600"> <img src="https://drive.google.com/uc?export=view&id=1Yz3VOzTFcmDXbedBpSQmmF_Kbh6NM0qx" height="600">  
-<img src="https://drive.google.com/uc?export=view&id=1_bqInkX6BJyBacL6UfCHLQdzqMtTZ095" height="600">  
+<img src="https://drive.google.com/uc?export=view&id=1EQ2z0JkKNeuIrsr82My1x9lveBAOit8w" height="600" alt="空氣品質頁面"> <img src="https://drive.google.com/uc?export=view&id=19r5TlHePLMdGUoZfEunnDCGBNaYHMtwh" height="600" alt="詳細空氣品質資訊">  
+<img src="https://drive.google.com/uc?export=view&id=1Pzby3ihZej9Zxfgx5_MKwoOztGcGO9XP" height="600" alt="天氣預報頁面"> <img src="https://drive.google.com/uc?export=view&id=1Yz3VOzTFcmDXbedBpSQmmF_Kbh6NM0qx" height="600" alt="詳細天氣四報資訊">  
+<img src="https://drive.google.com/uc?export=view&id=1_bqInkX6BJyBacL6UfCHLQdzqMtTZ095" height="600" alt="選擇區域">  
