@@ -10,7 +10,7 @@ import Foundation
 
 class AirQualityModel {}
 
-//MARK: - Object
+// MARK: - Object
 class AirQualityObj {
     var aqi: String = ""
     var co: String = ""
@@ -34,7 +34,7 @@ class AirQualityObj {
     var windDirec: String = ""
     var windSpeed: String = ""
     
-    init(dicData: Dictionary<String, Any>) {
+    init(dicData: [String: Any]) {
         self.aqi = dicData["AQI"] as? String ?? ""
         self.co = dicData["CO"] as? String ?? ""
         self.co_8hr = dicData["CO_8hr"] as? String ?? ""

@@ -44,7 +44,7 @@ class AirQualityCell: IndentionCell {
         roundedView.backgroundColor = highlighted ? .lightGray : .white
     }
     
-    //MARK: - private function
+    // MARK: - private function
     private func configStatusLabelTextColor(statusLabel: UILabel, aqi: String) {
         if let intAqi = Int(aqi) {
             if intAqi < 50 {

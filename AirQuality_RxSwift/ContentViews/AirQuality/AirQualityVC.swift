@@ -44,7 +44,7 @@ class AirQualityVC: BaseViewController {
 //        disposeBag = DisposeBag()
     }
     
-    //MARK: - private function
+    // MARK: - private function
     private func bindNavigationBtn() {
         self.navigationItem.hidesBackButton = true
         let customBackButton = UIBarButtonItem(title: "Weather", style: .done,
@@ -93,8 +93,14 @@ class AirQualityVC: BaseViewController {
         tableView.deselectRow(at: indexPath, animated: false)
         
         let airQualityModel: AirQualityObj = try! tableView.rx.model(at: indexPath)
-        let title = String(format: "%@ - %@", airQualityModel.country, airQualityModel.siteName)
-        let message = String(format: "一氧化碳：%@ ppm\n臭氧：%@ ppb\nPM10：%@ μg/m3\n風速：%@ m/sec", airQualityModel.co, airQualityModel.o3, airQualityModel.pm10, airQualityModel.windSpeed)
+        let title = String(format: "%@ - %@",
+                           airQualityModel.country,
+                           airQualityModel.siteName)
+        let message = String(format: "一氧化碳：%@ ppm\n臭氧：%@ ppb\nPM10：%@ μg/m3\n風速：%@ m/sec",
+                             airQualityModel.co,
+                             airQualityModel.o3,
+                             airQualityModel.pm10,
+                             airQualityModel.windSpeed)
         
         let alert = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction.init(title: "OK", style: .cancel, handler: nil))
@@ -107,7 +113,7 @@ class AirQualityVC: BaseViewController {
     
 }
 
-//MARK: - Extension
+// MARK: - Extension
 extension AirQualityVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 90.0

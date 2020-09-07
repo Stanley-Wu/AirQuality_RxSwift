@@ -19,7 +19,7 @@ class IndentionCell: UITableViewCell {
         set (newFrame) {
             let x = newFrame.origin.x + margin
             let width = newFrame.width - 2 * margin
-            let resizeFrame = CGRect(origin: CGPoint(x: x,y :newFrame.origin.y), size: CGSize(width: width, height: newFrame.height))
+            let resizeFrame = CGRect(origin: CGPoint(x: x, y: newFrame.origin.y), size: CGSize(width: width, height: newFrame.height))
             super.frame = resizeFrame
         }
     }

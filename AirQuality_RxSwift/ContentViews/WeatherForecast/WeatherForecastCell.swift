@@ -28,10 +28,12 @@ class WeatherForecastCell: IndentionCell {
         }
     }
     
-    //MARK: - private function
+    // MARK: - private function
     private func convertTimeStringToUI(strTime: String) -> String {
-        if let date = TimeUtility.stringConvertToDateWithDateFormatter(formatter: "yyyy-MM-dd HH:mm:ss", string: strTime) {
-            return TimeUtility.dateConvertToStringWithDateFormatter(formatter: "MM-dd HH:mm", timeInterval: date.timeIntervalSince1970) ?? ""
+        if let date = TimeUtility.stringConvertToDateWithDateFormatter(formatter: "yyyy-MM-dd HH:mm:ss",
+                                                                       string: strTime) {
+            return TimeUtility.dateConvertToStringWithDateFormatter(formatter: "MM-dd HH:mm",
+                                                                    timeInterval: date.timeIntervalSince1970) ?? ""
         }
         else {
             return ""

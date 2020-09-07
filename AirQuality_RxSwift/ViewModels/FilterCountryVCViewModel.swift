@@ -12,14 +12,14 @@ import RxRelay
 class FilterCountryVCViewModel {
     
     weak var coordinator: MainCoordinator?
-    var countryDatas = BehaviorRelay<Array<String>>(value: [])
+    var countryDatas = BehaviorRelay<[String]>(value: [])
     var selectedCountryId = -1 {
         willSet {
             countryDatas.accept(countryDatas.value)
         }
     }
     
-    init(countryDatas: Array<String>, selectedCountryId: Int) {
+    init(countryDatas: [String], selectedCountryId: Int) {
         self.countryDatas.accept(countryDatas)
         self.selectedCountryId = selectedCountryId
     }

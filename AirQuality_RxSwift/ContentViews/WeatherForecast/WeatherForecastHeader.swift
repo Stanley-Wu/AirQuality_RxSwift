@@ -38,7 +38,7 @@ class WeatherForecastHeader: UITableViewHeaderFooterView {
         self.addGestureRecognizer(gesture)
     }
     
-    //MARK: - private function
+    // MARK: - private function
     private func configWeatherForecastHeaderLabelColor(forecast: ForecastObj) {
         if let maxT = Int(forecast.nameMaxT) {
             if maxT > 27 {

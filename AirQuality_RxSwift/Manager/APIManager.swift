@@ -9,7 +9,7 @@
 import Foundation
 
 class APIManager {
-    static func getAirQuality(completion: @escaping (Array<Any>?, Error?) -> Void) {
+    static func getAirQuality(completion: @escaping ([Any]?, Error?) -> Void) {
         AirQualityRequest.init().getAirQualityDataRequest { (data, failure) in
             if let error = failure {
                 completion(nil, error)
@@ -20,7 +20,7 @@ class APIManager {
         }
     }
     
-    static func getWeatherForecast(completion: @escaping (Dictionary<String, Any>?, Error?) -> Void) {
+    static func getWeatherForecast(completion: @escaping ([String: Any]?, Error?) -> Void) {
         WeatherForecastRequest.init().getWeatherForecastDataRequest { (data, failure) in
             if let error = failure {
                 completion(nil, error)

@@ -44,7 +44,7 @@ class WeatherForecastVC: BaseViewController {
         disposeBag = DisposeBag()
     }
     
-    //MARK: - private function
+    // MARK: - private function
     private func bindUIComponent() {
         bindTableView()
         
@@ -57,7 +57,8 @@ class WeatherForecastVC: BaseViewController {
     
     private func bindTableView() {
         tableView.register(UINib(nibName: "WeatherForecastCell", bundle: nil), forCellReuseIdentifier: "WeatherForecastCell")
-        tableView.register(UINib(nibName: "WeatherForecastHeader", bundle: nil), forHeaderFooterViewReuseIdentifier: "WeatherForecastHeader")
+        tableView.register(UINib(nibName: "WeatherForecastHeader", bundle: nil),
+                           forHeaderFooterViewReuseIdentifier: "WeatherForecastHeader")
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 40.0))
         
         tableView.rx.setDelegate(self).disposed(by: disposeBag)
@@ -66,12 +67,14 @@ class WeatherForecastVC: BaseViewController {
             self.tableView.deselectRow(at: indexPath, animated: false)
         }).disposed(by: disposeBag)
         
-        let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<WeatherForecastObj, ForecastObj>>(configureCell: { dataSource, tableView, indexPath, item in
+        // swiftlint:disable line_length
+        let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<WeatherForecastObj, ForecastObj>>(configureCell: { _, tableView, indexPath, item in
             let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherForecastCell", for: indexPath) as! WeatherForecastCell
             cell.forecastObj = item
             cell.margin = 20.0
             return cell
         })
+        // swiftlint:enable line_length
         viewModel.dataSource = dataSource
         
         viewModel.tableDatas.bind(to: tableView.rx.items(dataSource: dataSource)).disposed(by: disposeBag)
@@ -89,7 +92,7 @@ class WeatherForecastVC: BaseViewController {
     
 }
 
-//MARK: - Extension
+// MARK: - Extension
 extension WeatherForecastVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 90.0

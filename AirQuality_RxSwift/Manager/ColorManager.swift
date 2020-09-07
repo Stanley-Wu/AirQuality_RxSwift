@@ -19,7 +19,7 @@ class ColorManager {
     }
     
     class func green() -> UIColor {
-        return UIColor(red: 37, green: 230, blue: 42);
+        return UIColor(red: 37, green: 230, blue: 42)
     }
 
     class func yellow() -> UIColor {

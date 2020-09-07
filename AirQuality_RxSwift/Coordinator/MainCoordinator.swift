@@ -47,7 +47,7 @@ class MainCoordinator: Coordinator {
         }
     }
     
-    func presentToFilterCountry(datas: Array<String>, selectedCountryId: Int, dismissFilterCountry: @escaping(Int) -> Void) {
+    func presentToFilterCountry(datas: [String], selectedCountryId: Int, dismissFilterCountry: @escaping(Int) -> Void) {
         let vm = FilterCountryVCViewModel(countryDatas: datas, selectedCountryId: selectedCountryId)
         vm.coordinator = self
         let nv = BaseNavigationController(rootViewController: FilterCountryVC(viewModel: vm))

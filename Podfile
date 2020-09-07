@@ -9,5 +9,6 @@ target 'AirQuality_RxSwift' do
   pod 'RxSwift', '~> 5'
   pod 'RxCocoa', '~> 5'
   pod 'RxDataSources', '~> 4.0'
+  pod 'SwiftLint'
 
 end

@@ -30,7 +30,7 @@ class FilterCountryVC: BaseViewController {
         bindTableView()        
     }
     
-    //MARK: - private function
+    // MARK: - private function
     private func bindNavigationBtn() {
         let customBackButton = UIBarButtonItem(barButtonSystemItem: .reply, target: nil, action: nil)
         customBackButton.rx.tap.subscribe(onNext: { [unowned self] () in

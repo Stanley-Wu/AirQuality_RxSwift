@@ -10,27 +10,27 @@ import Foundation
 
 class WeatherForecastModel {}
 
-//MARK: - Object
+// MARK: - Object
 class WeatherForecastObj {
     var locationId: Int = -1
     var locationName: String = ""
-    var forecast: Array<ForecastObj> = Array<ForecastObj>()
+    var forecast: [ForecastObj] = [ForecastObj]()
     
-    init(dicData: Dictionary<String, Any>) {
+    init(dicData: [String: Any]) {
         self.locationName = dicData["locationName"] as? String ?? ""
-        let weatherElement = dicData["weatherElement"] as? Array<Dictionary<String, Any>> ?? []
+        let weatherElement = dicData["weatherElement"] as? [[String: Any]] ?? []
         
-        var aryWx = Array<Dictionary<String, String>>()
-        var aryPoP = Array<Dictionary<String, String>>()
-        var aryMinT = Array<Dictionary<String, String>>()
-        var aryMaxT = Array<Dictionary<String, String>>()
-        var aryCI = Array<Dictionary<String, String>>()
+        var aryWx = [[String: String]]()
+        var aryPoP = [[String: String]]()
+        var aryMinT = [[String: String]]()
+        var aryMaxT = [[String: String]]()
+        var aryCI = [[String: String]]()
         
         for element in weatherElement {
-            for time in element["time"] as! Array<Dictionary<String, Any>> {
+            for time in element["time"] as! [[String: Any]] {
                 if element["elementName"] as! String == "Wx" {
-                    var dicWx = Dictionary<String, String>()
-                    let parameter = time["parameter"] as! Dictionary<String, String>
+                    var dicWx = [String: String]()
+                    let parameter = time["parameter"] as! [String: String]
                     
                     dicWx["startTime"] = time["startTime"] as? String
                     dicWx["endTime"] = time["endTime"] as? String
@@ -38,8 +38,8 @@ class WeatherForecastObj {
                     aryWx.append(dicWx)
                 }
                 else if element["elementName"] as! String == "PoP" {
-                    var dicPoP = Dictionary<String, String>()
-                    let parameter = time["parameter"] as! Dictionary<String, String>
+                    var dicPoP = [String: String]()
+                    let parameter = time["parameter"] as! [String: String]
                     
                     dicPoP["startTime"] = time["startTime"] as? String
                     dicPoP["endTime"] = time["endTime"] as? String
@@ -47,8 +47,8 @@ class WeatherForecastObj {
                     aryPoP.append(dicPoP)
                 }
                 else if element["elementName"] as! String == "MinT" {
-                    var dicMinT = Dictionary<String, String>()
-                    let parameter = time["parameter"] as! Dictionary<String, String>
+                    var dicMinT = [String: String]()
+                    let parameter = time["parameter"] as! [String: String]
                     
                     dicMinT["startTime"] = time["startTime"] as? String
                     dicMinT["endTime"] = time["endTime"] as? String
@@ -56,8 +56,8 @@ class WeatherForecastObj {
                     aryMinT.append(dicMinT)
                 }
                 else if element["elementName"] as! String == "MaxT" {
-                    var dicMaxT = Dictionary<String, String>()
-                    let parameter = time["parameter"] as! Dictionary<String, String>
+                    var dicMaxT = [String: String]()
+                    let parameter = time["parameter"] as! [String: String]
                     
                     dicMaxT["startTime"] = time["startTime"] as? String
                     dicMaxT["endTime"] = time["endTime"] as? String
@@ -65,8 +65,8 @@ class WeatherForecastObj {
                     aryMaxT.append(dicMaxT)
                 }
                 else if element["elementName"] as! String == "CI" {
-                    var dicCI = Dictionary<String, String>()
-                    let parameter = time["parameter"] as! Dictionary<String, String>
+                    var dicCI = [String: String]()
+                    let parameter = time["parameter"] as! [String: String]
                     
                     dicCI["startTime"] = time["startTime"] as? String
                     dicCI["endTime"] = time["endTime"] as? String
