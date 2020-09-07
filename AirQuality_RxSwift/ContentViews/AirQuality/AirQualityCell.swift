@@ -9,6 +9,7 @@
 import UIKit
 
 class AirQualityCell: IndentionCell {
+    @IBOutlet weak var roundedView: UIView!
     @IBOutlet weak var lbCountry: UILabel!
     @IBOutlet weak var lbSite: UILabel!
     @IBOutlet weak var lbPollutant: UILabel!
@@ -26,6 +27,21 @@ class AirQualityCell: IndentionCell {
             lbStatus.text = newValue.status
             configStatusLabelTextColor(statusLabel: lbStatus, aqi: newValue.aqi)
         }
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        clipsToBounds = false
+        layer.shadowOpacity = 0.1
+        layer.shadowOffset = CGSize(width: 2, height: 2)
+        selectionStyle = .none
+        roundedView.layer.cornerRadius = 10.0
+    }
+    
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+        roundedView.backgroundColor = highlighted ? .lightGray : .white
     }
     
     //MARK: - private function

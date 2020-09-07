@@ -78,6 +78,7 @@ class AirQualityVC: BaseViewController {
             let indexPath = IndexPath(row: row, section: 0)
             let cell = tableView.dequeueReusableCell(withIdentifier: "AirQualityCell", for: indexPath) as! AirQualityCell
             cell.airQualityObj = airQualityObj
+            cell.margin = 15.0
             return cell
         }.disposed(by: disposeBag)
     }
@@ -109,6 +110,6 @@ class AirQualityVC: BaseViewController {
 //MARK: - Extension
 extension AirQualityVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80.0
+        return 90.0
     }
 }

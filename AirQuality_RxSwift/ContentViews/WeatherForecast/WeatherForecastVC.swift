@@ -58,6 +58,7 @@ class WeatherForecastVC: BaseViewController {
     private func bindTableView() {
         tableView.register(UINib(nibName: "WeatherForecastCell", bundle: nil), forCellReuseIdentifier: "WeatherForecastCell")
         tableView.register(UINib(nibName: "WeatherForecastHeader", bundle: nil), forHeaderFooterViewReuseIdentifier: "WeatherForecastHeader")
+        tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 40.0))
         
         tableView.rx.setDelegate(self).disposed(by: disposeBag)
         
@@ -68,6 +69,7 @@ class WeatherForecastVC: BaseViewController {
         let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<WeatherForecastObj, ForecastObj>>(configureCell: { dataSource, tableView, indexPath, item in
             let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherForecastCell", for: indexPath) as! WeatherForecastCell
             cell.forecastObj = item
+            cell.margin = 20.0
             return cell
         })
         viewModel.dataSource = dataSource
@@ -90,7 +92,11 @@ class WeatherForecastVC: BaseViewController {
 //MARK: - Extension
 extension WeatherForecastVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 60.0
+        return 90.0
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 10.0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -106,5 +112,14 @@ extension WeatherForecastVC: UITableViewDelegate {
             self.viewModel.expandSectionIdx = section
         }
         return header
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.roundUpCorners([.topRight, .topLeft, .bottomRight, .bottomLeft], radius: 0)
+        
+        let rowCount = tableView.numberOfRows(inSection: indexPath.section)
+        if indexPath.row == rowCount - 1 {
+            cell.roundUpCorners([.bottomRight, .bottomLeft], radius: 10)
+        }
     }
 }

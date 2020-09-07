@@ -9,6 +9,7 @@
 import UIKit
 
 class WeatherForecastHeader: UITableViewHeaderFooterView {
+    @IBOutlet weak var roundedView: UIView!
     @IBOutlet weak var lbCountry: UILabel!
     @IBOutlet weak var lbWx: UILabel!
     @IBOutlet weak var lbMaxT: UILabel!
@@ -27,12 +28,14 @@ class WeatherForecastHeader: UITableViewHeaderFooterView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        clipsToBounds = false
+        layer.shadowOpacity = 0.1
+        layer.shadowOffset = CGSize(width: 2, height: 2)
+        roundedView.layer.cornerRadius = 10.0
+        
         let gesture = UITapGestureRecognizer(target: self, action: #selector(self.didClickWeatherForecastHeader))
         self.addGestureRecognizer(gesture)
-    }
-    
-    @objc private func didClickWeatherForecastHeader() {
-        onClick?()
     }
     
     //MARK: - private function
@@ -66,5 +69,9 @@ class WeatherForecastHeader: UITableViewHeaderFooterView {
                 lbMinT.textColor = ColorManager.blue()
             }
         }
+    }
+    
+    @objc private func didClickWeatherForecastHeader() {
+        onClick?()
     }
 }
