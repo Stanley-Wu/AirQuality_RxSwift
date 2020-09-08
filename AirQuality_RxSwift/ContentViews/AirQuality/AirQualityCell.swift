@@ -37,29 +37,30 @@ class AirQualityCell: IndentionCell {
         layer.shadowOffset = CGSize(width: 2, height: 2)
         selectionStyle = .none
         roundedView.layer.cornerRadius = 10.0
+        roundedView.backgroundColor = .systemBackground
     }
     
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
-        roundedView.backgroundColor = highlighted ? .lightGray : .white
+        roundedView.backgroundColor = highlighted ? .systemGray4 : .systemBackground
     }
     
     // MARK: - private function
     private func configStatusLabelTextColor(statusLabel: UILabel, aqi: String) {
         if let intAqi = Int(aqi) {
-            if intAqi < 50 {
+            if intAqi <= 50 {
                 statusLabel.textColor = ColorManager.green()
             }
-            else if intAqi < 100 {
+            else if intAqi <= 100 {
                 statusLabel.textColor = ColorManager.yellow()
             }
-            else if intAqi < 150 {
+            else if intAqi <= 150 {
                 statusLabel.textColor = ColorManager.orange()
             }
-            else if intAqi < 200 {
+            else if intAqi <= 200 {
                 statusLabel.textColor = ColorManager.red()
             }
-            else if intAqi < 300 {
+            else if intAqi <= 300 {
                 statusLabel.textColor = ColorManager.purple()
             }
             else {
