@@ -10,5 +10,9 @@ target 'AirQuality_RxSwift' do
   pod 'RxCocoa', '~> 5'
   pod 'RxDataSources', '~> 4.0'
   pod 'SwiftLint'
+  
+  target 'AirQuality_RxSwiftTests' do
+      inherit! :complete
+  end
 
 end

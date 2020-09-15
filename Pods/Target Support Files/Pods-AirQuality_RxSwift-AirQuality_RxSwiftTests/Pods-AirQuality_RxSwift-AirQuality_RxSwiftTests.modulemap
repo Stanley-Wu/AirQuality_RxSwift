@@ -1,0 +1,6 @@
+framework module Pods_AirQuality_RxSwift_AirQuality_RxSwiftTests {
+  umbrella header "Pods-AirQuality_RxSwift-AirQuality_RxSwiftTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

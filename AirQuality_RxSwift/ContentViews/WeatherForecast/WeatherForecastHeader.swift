@@ -2,7 +2,7 @@
 //  WeatherForecastHeader.swift
 //  AirQuality
 //
-//  Created by Dlink on 2018/3/5.
+//  Created by Stanley on 2018/3/5.
 //  Copyright © 2018年 Stanley. All rights reserved.
 //
 

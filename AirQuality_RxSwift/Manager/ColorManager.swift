@@ -3,7 +3,7 @@
 //  AppDesignPattern
 //
 //  Created by Stanley on 2018/2/6.
-//  Copyright © 2018 mydlinksrddlink. All rights reserved.
+//  Copyright © 2018 Stanley. All rights reserved.
 //
 
 import UIKit

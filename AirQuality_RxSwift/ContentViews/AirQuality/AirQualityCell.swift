@@ -2,7 +2,7 @@
 //  AirQualityCell.swift
 //  AirQuality
 //
-//  Created by Dlink on 2018/3/1.
+//  Created by Stanley on 2018/3/1.
 //  Copyright © 2018年 Stanley. All rights reserved.
 //
 

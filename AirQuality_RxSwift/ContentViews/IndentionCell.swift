@@ -2,7 +2,7 @@
 //  IndentionCell.swift
 //  UIComponent
 //
-//  Created by Dlink on 2018/2/26.
+//  Created by Stanley on 2018/2/26.
 //  Copyright © 2018年 Stanley. All rights reserved.
 //
 

@@ -2,8 +2,8 @@
 //  UIViewExtension.swift
 //  AirQuality_RxSwift
 //
-//  Created by Dlink on 2020/9/7.
-//  Copyright © 2020 Dlink. All rights reserved.
+//  Created by Stanley on 2020/9/7.
+//  Copyright © 2020 Stanley. All rights reserved.
 //
 
 import UIKit
