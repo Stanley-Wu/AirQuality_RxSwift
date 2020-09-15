@@ -48,11 +48,15 @@ class WeatherForecastVC: BaseViewController {
     private func bindUIComponent() {
         bindTableView()
         
-        viewModel.isHiddenLoading.bind(to: loadingView.rx.isHidden).disposed(by: disposeBag)
+        viewModel.isHiddenLoading
+            .bind(to: loadingView.rx.isHidden)
+            .disposed(by: disposeBag)
         
-        btnLocation.rx.tap.subscribe(onNext: { [unowned self] () in
-            self.viewModel.presentFilterCountry()
-        }).disposed(by: disposeBag)
+        btnLocation.rx.tap
+            .subscribe(onNext: { [unowned self] () in
+                self.viewModel.presentFilterCountry()
+            })
+            .disposed(by: disposeBag)
     }
     
     private func bindTableView() {
@@ -61,11 +65,15 @@ class WeatherForecastVC: BaseViewController {
                            forHeaderFooterViewReuseIdentifier: "WeatherForecastHeader")
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 40.0))
         
-        tableView.rx.setDelegate(self).disposed(by: disposeBag)
+        tableView.rx
+            .setDelegate(self)
+            .disposed(by: disposeBag)
         
-        tableView.rx.itemSelected.subscribe(onNext: { [unowned self] (indexPath) in
-            self.tableView.deselectRow(at: indexPath, animated: false)
-        }).disposed(by: disposeBag)
+        tableView.rx.itemSelected
+            .subscribe(onNext: { [unowned self] (indexPath) in
+                self.tableView.deselectRow(at: indexPath, animated: false)
+            })
+            .disposed(by: disposeBag)
         
         // swiftlint:disable line_length
         let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<WeatherForecastObj, ForecastObj>>(configureCell: { _, tableView, indexPath, item in
@@ -77,13 +85,21 @@ class WeatherForecastVC: BaseViewController {
         // swiftlint:enable line_length
         viewModel.dataSource = dataSource
         
-        viewModel.tableDatas.bind(to: tableView.rx.items(dataSource: dataSource)).disposed(by: disposeBag)
+        viewModel.tableDatas
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .userInitiated))
+            .observeOn(MainScheduler.instance)
+            .bind(to: tableView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
     }
     
     private func bindRequestError() {
-        viewModel.strRequestError.subscribe(onNext: { [unowned self] (strError) in
-            self.showRequestError(strError)
-        }).disposed(by: disposeBag)
+        viewModel.strRequestError
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .userInitiated))
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] (strError) in
+                self.showRequestError(strError)
+            })
+            .disposed(by: disposeBag)
     }
     
     private func showRequestError(_ strError: String) {

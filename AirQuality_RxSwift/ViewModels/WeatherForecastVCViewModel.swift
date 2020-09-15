@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RxSwift
 import RxRelay
 import RxDataSources
 
@@ -31,34 +32,38 @@ class WeatherForecastVCViewModel {
             filterDataBySelectedCountryIndex()
         }
     }
+    var disposeBag: DisposeBag!
     
     init(selectedCountryId: Int) {
         self.selectedCountryId = selectedCountryId
+        disposeBag = DisposeBag()
     }
     
     func queryWeatherForecastAPIData() {
         isHiddenLoading.accept(false)
-        APIManager.getWeatherForecast { [unowned self] (dicWeather, failure) in
-            self.isHiddenLoading.accept(true)
-            if let error = failure {
-                self.strRequestError.accept(error.localizedDescription)
-            }
-            else {
-                self.originalWeatherForecastDatas = [WeatherForecastObj]()
-                if let records = dicWeather!["records"] as? [String: Any] {
-                    if let locations = records["location"] as? [[String: Any]] {
-                        for location in locations {
-                            let weatherForecast = WeatherForecastObj(dicData: location)
-                            
-                            self.configLocationId(weatherForecastModel: weatherForecast)
-                            self.originalWeatherForecastDatas.append(weatherForecast)
+        APIManager.getWeatherForecast()
+            .subscribe(
+                onSuccess: { [unowned self] (dicWeather) in
+                    self.isHiddenLoading.accept(true)
+                    self.originalWeatherForecastDatas = [WeatherForecastObj]()
+                    if let records = dicWeather["records"] as? [String: Any] {
+                        if let locations = records["location"] as? [[String: Any]] {
+                            for location in locations {
+                                let weatherForecast = WeatherForecastObj(dicData: location)
+                                
+                                self.configLocationId(weatherForecastModel: weatherForecast)
+                                self.originalWeatherForecastDatas.append(weatherForecast)
+                            }
                         }
                     }
-                }
-                self.originalWeatherForecastDatas = self.originalWeatherForecastDatas.sorted(by: { $0.locationId < $1.locationId })
-                self.filterDataBySelectedCountryIndex()
-            }
-        }
+                    self.originalWeatherForecastDatas = self.originalWeatherForecastDatas.sorted(by: { $0.locationId < $1.locationId })
+                    self.filterDataBySelectedCountryIndex()
+                },
+                onError: { [unowned self] (error) in
+                    self.isHiddenLoading.accept(true)
+                    self.strRequestError.accept(error.localizedDescription)
+            })
+            .disposed(by: disposeBag)
     }
     
     func presentFilterCountry() {

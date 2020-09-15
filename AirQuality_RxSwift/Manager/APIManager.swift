@@ -7,27 +7,14 @@
 //
 
 import Foundation
+import RxSwift
 
 class APIManager {
-    static func getAirQuality(completion: @escaping ([Any]?, Error?) -> Void) {
-        AirQualityRequest.init().getAirQualityDataRequest { (data, failure) in
-            if let error = failure {
-                completion(nil, error)
-            }
-            else {
-                completion(data!, nil)
-            }
-        }
+    static func getAirQuality() -> Single<[Any]> {
+        return AirQualityRequest.getAirQualityDataRequest()
     }
     
-    static func getWeatherForecast(completion: @escaping ([String: Any]?, Error?) -> Void) {
-        WeatherForecastRequest.init().getWeatherForecastDataRequest { (data, failure) in
-            if let error = failure {
-                completion(nil, error)
-            }
-            else {
-                completion(data!, nil)
-            }
-        }
+    static func getWeatherForecast() -> Single<[String: Any]> {
+        return WeatherForecastRequest.getWeatherForecastDataRequest()
     }
 }

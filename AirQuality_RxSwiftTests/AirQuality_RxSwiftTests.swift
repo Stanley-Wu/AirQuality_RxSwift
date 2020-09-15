@@ -12,26 +12,36 @@ import XCTest
 
 class AirQualityRxSwiftTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    var disposeBag: DisposeBag!
+    
+    override func setUp() {
+        super.setUp()
+        disposeBag = DisposeBag()
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    override func tearDown() {
+        disposeBag = nil
+        super.tearDown()
     }
     
     func testAPIManager_GetAirQuality() throws {
         let expectation = self.expectation(description: "Completion handler invoked")
         var responseDatas: [Any]?
         var responseError: Error?
-        APIManager.getAirQuality { [unowned self] (datas, error) in
-            responseDatas = datas
-            responseError = error
-            
-            self.testAirQualityObj(aryDatas: datas)
-            
-            expectation.fulfill()
-        }
+        APIManager.getAirQuality()
+            .subscribe(
+                onSuccess: { [unowned self] (datas) in
+                    responseDatas = datas
+                    self.testAirQualityObj(aryDatas: datas)
+
+                    expectation.fulfill()
+                },
+                onError: { (error) in
+                    responseError = error
+                    
+                    expectation.fulfill()
+            })
+            .disposed(by: disposeBag)
         wait(for: [expectation], timeout: 5)
         XCTAssertNil(responseError)
         XCTAssertNotNil(responseDatas)
@@ -41,14 +51,20 @@ class AirQualityRxSwiftTests: XCTestCase {
         let expectation = self.expectation(description: "Completion handler invoked")
         var responseDatas: [String: Any]?
         var responseError: Error?
-        APIManager.getWeatherForecast { [unowned self] (datas, error) in
-            responseDatas = datas
-            responseError = error
-            
-            self.testWeatherForecastObj(dicWeather: datas)
-            
-            expectation.fulfill()
-        }
+        APIManager.getWeatherForecast()
+            .subscribe(
+                onSuccess: { [unowned self] (datas) in
+                    responseDatas = datas
+                    self.testWeatherForecastObj(dicWeather: datas)
+                    
+                    expectation.fulfill()
+                },
+                onError: { (error) in
+                    responseError = error
+                    
+                    expectation.fulfill()
+            })
+            .disposed(by: disposeBag)
         wait(for: [expectation], timeout: 5)
         XCTAssertNil(responseError)
         XCTAssertNotNil(responseDatas)

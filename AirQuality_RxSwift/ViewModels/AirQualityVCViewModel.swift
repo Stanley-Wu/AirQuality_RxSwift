@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RxSwift
 import RxRelay
 
 class AirQualityVCViewModel {    
@@ -21,31 +22,34 @@ class AirQualityVCViewModel {
             filterDataBySelectedCountryIndex()
         }
     }
+    var disposeBag: DisposeBag!
     
     init() {
-        
+        disposeBag = DisposeBag()
     }
     
     func queryAirQualityAPIData() {
         isHiddenLoading.accept(false)
-        APIManager.getAirQuality { [unowned self] (aryDatas, failure) in
-            self.isHiddenLoading.accept(true)
-            if let error = failure {
-                self.strRequestError.accept(error.localizedDescription)
-            }
-            else {
-                self.originAirQualityDatas = [AirQualityObj]()
-                for result in aryDatas! {
-                    if let dic = result as? [String: Any] {
-                        let airQualityModel = AirQualityObj(dicData: dic)
-                        self.configCountryId(airQualityModel: airQualityModel)
-                        self.originAirQualityDatas.append(airQualityModel)
+        APIManager.getAirQuality()
+            .subscribe(
+                onSuccess: { [unowned self] (aryDatas) in
+                    self.isHiddenLoading.accept(true)
+                    self.originAirQualityDatas = [AirQualityObj]()
+                    for result in aryDatas {
+                        if let dic = result as? [String: Any] {
+                            let airQualityModel = AirQualityObj(dicData: dic)
+                            self.configCountryId(airQualityModel: airQualityModel)
+                            self.originAirQualityDatas.append(airQualityModel)
+                        }
                     }
-                }
-                self.originAirQualityDatas = self.originAirQualityDatas.sorted(by: { $0.countryId < $1.countryId })
-                self.filterDataBySelectedCountryIndex()
-            }
-        }
+                    self.originAirQualityDatas = self.originAirQualityDatas.sorted(by: { $0.countryId < $1.countryId })
+                    self.filterDataBySelectedCountryIndex()
+                },
+                onError: { [unowned self] (error) in
+                    self.isHiddenLoading.accept(true)
+                    self.strRequestError.accept(error.localizedDescription)
+            })
+            .disposed(by: disposeBag)
     }
     
     func pushToWeatherForecast() {

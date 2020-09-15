@@ -49,44 +49,62 @@ class AirQualityVC: BaseViewController {
         self.navigationItem.hidesBackButton = true
         let customBackButton = UIBarButtonItem(title: "Weather", style: .done,
                                                    target: nil, action: nil)
-        customBackButton.rx.tap.subscribe(onNext: { [unowned self] () in
-            self.viewModel.pushToWeatherForecast()
-        }).disposed(by: disposeBag)
+        customBackButton.rx.tap
+            .subscribe(onNext: { [unowned self] () in
+                self.viewModel.pushToWeatherForecast()
+            })
+            .disposed(by: disposeBag)
         self.navigationItem.rightBarButtonItem = customBackButton
     }
     
     private func bindUIComponent() {
         bindTableView()
         
-        viewModel.isHiddenLoading.bind(to: loadingView.rx.isHidden).disposed(by: disposeBag)
+        viewModel.isHiddenLoading
+            .bind(to: loadingView.rx.isHidden)
+            .disposed(by: disposeBag)
         
-        btnLocation.rx.tap.subscribe(onNext: { [unowned self] () in
-            self.viewModel.presentFilterCountry()
-        }).disposed(by: disposeBag)
+        btnLocation.rx.tap
+            .subscribe(onNext: { [unowned self] () in
+                self.viewModel.presentFilterCountry()
+            })
+            .disposed(by: disposeBag)
     }
     
     private func bindTableView() {
         tableView.register(UINib(nibName: "AirQualityCell", bundle: nil), forCellReuseIdentifier: "AirQualityCell")
         
-        tableView.rx.setDelegate(self).disposed(by: disposeBag)
+        tableView.rx
+            .setDelegate(self)
+            .disposed(by: disposeBag)
         
-        tableView.rx.itemSelected.subscribe(onNext: { [unowned self] (indexPath) in
-            self.presentSelectedCountryDetail(at: indexPath)
-        }).disposed(by: disposeBag)
+        tableView.rx.itemSelected
+            .subscribe(onNext: { [unowned self] (indexPath) in
+                self.presentSelectedCountryDetail(at: indexPath)
+            })
+            .disposed(by: disposeBag)
         
-        viewModel.airQualityDatas.bind(to: tableView.rx.items) { (tableView, row, airQualityObj) in
-            let indexPath = IndexPath(row: row, section: 0)
-            let cell = tableView.dequeueReusableCell(withIdentifier: "AirQualityCell", for: indexPath) as! AirQualityCell
-            cell.airQualityObj = airQualityObj
-            cell.margin = 15.0
-            return cell
-        }.disposed(by: disposeBag)
+        viewModel.airQualityDatas
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .userInitiated))
+            .observeOn(MainScheduler.instance)
+            .bind(to: tableView.rx.items) { (tableView, row, airQualityObj) in
+                let indexPath = IndexPath(row: row, section: 0)
+                let cell = tableView.dequeueReusableCell(withIdentifier: "AirQualityCell", for: indexPath) as! AirQualityCell
+                cell.airQualityObj = airQualityObj
+                cell.margin = 15.0
+                return cell
+            }
+            .disposed(by: disposeBag)
     }
     
     private func bindRequestError() {
-        viewModel.strRequestError.subscribe(onNext: { [unowned self] (strError) in
-            self.showRequestError(strError)
-        }).disposed(by: disposeBag)
+        viewModel.strRequestError
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .userInitiated))
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] (strError) in
+                self.showRequestError(strError)
+            })
+            .disposed(by: disposeBag)
     }
     
     private func presentSelectedCountryDetail(at indexPath: IndexPath) {
