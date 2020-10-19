@@ -9,14 +9,18 @@
 import UIKit
 
 protocol Coordinator {
+    /* temporarily not use
     var childCoordinators: [Coordinator] { get set }
+     */
     var navigationController: UINavigationController { get set }
 
     func start()
 }
 
 class MainCoordinator: Coordinator {
+    /* temporarily not use
     var childCoordinators = [Coordinator]()
+     */
     var navigationController: UINavigationController
     var completeDismissFilterCountry: ((Int) -> Void)?
 

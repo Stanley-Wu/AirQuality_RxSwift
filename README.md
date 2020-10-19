@@ -12,7 +12,7 @@
 - 資料由 URLSession request 方式取得 Open data 資料，將取得到的 json format data 轉換成 Dictionary 後，由中間 ViewModel 轉成物件傳回 UI 使用  
 - 利用 **Coordinator** 在各 ViewModel 間傳遞必要資料  
 - 使用 **SwiftLint** 檢查 coding style 是否符合規範，並有簡易 unit test 檢查功能正確性  
-<img src="https://drive.google.com/uc?export=view&id=1CyLMfpq5rwpZ7mdDGZp6-MsW0nNu7C05" width="800"></img>  
+<img src="https://drive.google.com/uc?export=view&id=1CyLMfpq5rwpZ7mdDGZp6-MsW0nNu7C05" width="800" alt="程式架構"></img>  
 ***  
 #### 使用說明  
 - App 開啟時預設顯示全台各地空氣品質資訊，點選該地區會跳出詳細內容  
